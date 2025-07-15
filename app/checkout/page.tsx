@@ -19,13 +19,24 @@ export default function CheckoutPage() {
     }
   }, [user]);
 
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
   const handlePlaceOrder = () => {
+    const newOrder = {
+      id: Date.now(),
+      date: new Date().toLocaleString(),
+      items: cart,
+      total: total.toFixed(2),
+    };
+
+    const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+    const updatedOrders = [newOrder, ...existingOrders];
+    localStorage.setItem('orders', JSON.stringify(updatedOrders));
+
     showNotification('Order placed successfully!', 'success');
     clearCart();
     router.push('/profile');
   };
-
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <div className="checkout-page">
