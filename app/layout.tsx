@@ -4,6 +4,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { NotificationProvider } from "@/context/NotificationContext";
 import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
+import Footer from '@/components/Footer';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({
             <CartProvider>
               <Navbar />
               {children}
+              <Footer />
             </CartProvider>
           </NotificationProvider>
         </AuthProvider>
